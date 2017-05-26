@@ -2,6 +2,8 @@ package com.plateno.service;
 
 import java.util.List;
 
+import com.plateno.common.pager.Pager;
+import com.plateno.pojo.FindConditionVo;
 import com.plateno.pojo.MemberInfo;
 
 public interface MemberService {
@@ -13,5 +15,7 @@ public interface MemberService {
 	int add(MemberInfo memberInfo);
 	
 	int modify(MemberInfo memberInfo);
+	
+	Pager<MemberInfo> findByCondition(FindConditionVo condition); 
 
 }

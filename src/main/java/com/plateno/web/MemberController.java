@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plateno.common.config.ResultCode;
+import com.plateno.common.pager.Pager;
 import com.plateno.common.util.StringUtil;
+import com.plateno.pojo.FindConditionVo;
 import com.plateno.pojo.MemberInfo;
 import com.plateno.pojo.Result;
 import com.plateno.service.MemberService;
@@ -46,6 +48,17 @@ public class MemberController {
 		result.setCode(ResultCode.SUCCESS.getCode());
 		result.setMsg(ResultCode.SUCCESS.getMsg());
 		result.setData(members);
+		return result;
+	}
+	
+	@RequestMapping(value="/getMembersBycondition",method=RequestMethod.POST)
+	@ResponseBody
+	public Result<Pager<MemberInfo>> getMembersBycondition(@RequestBody FindConditionVo condition){
+		Result<Pager<MemberInfo>> result=new Result<Pager<MemberInfo>>();
+		Pager<MemberInfo> pager=memberService.findByCondition(condition);
+		result.setCode(ResultCode.SUCCESS.getCode());
+		result.setMsg(ResultCode.SUCCESS.getMsg());
+		result.setData(pager);
 		return result;
 	}
 	

@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.plateno.common.pager.Pager;
 import com.plateno.dao.MemberInfoDao;
+import com.plateno.pojo.FindConditionVo;
 import com.plateno.pojo.MemberInfo;
 import com.plateno.service.MemberService;
 
@@ -42,6 +44,15 @@ public class MemberServiceImpl implements MemberService{
 	public int modify(MemberInfo memberInfo) {
 		// TODO Auto-generated method stub
 		return memberDao.update(memberInfo);
+	}
+
+	@Override
+	public Pager<MemberInfo> findByCondition(FindConditionVo condition) {
+		// TODO Auto-generated method stub
+		condition.setStartIndex(condition.getPageSize()*(condition.getPageNo()-1));
+		List<MemberInfo> list=memberDao.selectByCondition(condition);
+		int rowCount=memberDao.selectCountOfRecords(condition);
+		return new Pager<MemberInfo>(condition.getPageNo(), condition.getPageSize(), rowCount, list);
 	}
 
 }
