@@ -38,4 +38,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.insert(memberInfo);
 	}
 
+	@Override
+	public int modify(MemberInfo memberInfo) {
+		// TODO Auto-generated method stub
+		return memberDao.update(memberInfo);
+	}
+
 }

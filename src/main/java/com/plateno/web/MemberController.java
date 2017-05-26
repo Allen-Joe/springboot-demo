@@ -58,15 +58,49 @@ public class MemberController {
 			result.setMsg(ResultCode.ERROR_PARAM_ILLGAL.getMsg());
 			return result;
 		}
-		int cnt = memberService.add(memberInfo);
-		if (cnt==1) {
-			result.setCode(ResultCode.SUCCESS.getCode());
-			result.setMsg(ResultCode.SUCCESS.getMsg());
-		}else{
-			result.setCode(ResultCode.ERROR_ADD_FAILURE.getCode());
-			result.setMsg(ResultCode.ERROR_ADD_FAILURE.getMsg());
+		try {
+			int cnt = memberService.add(memberInfo);
+			if (cnt==1) {
+				result.setCode(ResultCode.SUCCESS.getCode());
+				result.setMsg(ResultCode.SUCCESS.getMsg());
+			}else{
+				result.setCode(ResultCode.ERROR_ADD_FAILURE.getCode());
+				result.setMsg(ResultCode.ERROR_ADD_FAILURE.getMsg());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			result.setCode(ResultCode.ERROR_SYSTEM.getCode());
+			result.setMsg(ResultCode.ERROR_SYSTEM.getMsg());
 		}
 		return result;
+	}
+	
+	@RequestMapping(value="/modifyMemberInfo",method=RequestMethod.POST)
+	@ResponseBody
+	public Result<Integer> modifyMemberInfo(@RequestBody MemberInfo memberInfo){
+		Result<Integer> result=new Result<Integer>();
+		if(!paramValidate(memberInfo)){
+			result.setCode(ResultCode.ERROR_PARAM_ILLGAL.getCode());
+			result.setMsg(ResultCode.ERROR_PARAM_ILLGAL.getMsg());
+			return result;
+		}
+		try {
+			int cnt=memberService.modify(memberInfo);
+			if (cnt==1) {
+				result.setCode(ResultCode.SUCCESS.getCode());
+				result.setMsg(ResultCode.SUCCESS.getMsg());
+			}else{
+				result.setCode(ResultCode.ERROR_MODIFY_FAILURE.getCode());
+				result.setMsg(ResultCode.ERROR_MODIFY_FAILURE.getMsg());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			result.setCode(ResultCode.ERROR_SYSTEM.getCode());
+			result.setMsg(ResultCode.ERROR_SYSTEM.getMsg());
+		}
+		return result;		
 	}
 	
 	private boolean paramValidate(MemberInfo param){

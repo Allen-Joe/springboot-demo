@@ -5,7 +5,8 @@ public enum ResultCode {
 	SUCCESS(0,"success"),
 	ERROR_ADD_FAILURE(1001,"add object to db failure"),
 	ERROR_SYSTEM(1002,"system error"),
-	ERROR_PARAM_ILLGAL(1003,"param illgal")
+	ERROR_PARAM_ILLGAL(1003,"param illgal"),
+	ERROR_MODIFY_FAILURE(1004,"modify object to db failure"),
 	;
 	
 	private int code;

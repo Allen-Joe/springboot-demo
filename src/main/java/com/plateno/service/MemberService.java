@@ -11,5 +11,7 @@ public interface MemberService {
 	MemberInfo find(Integer memberId);
 	
 	int add(MemberInfo memberInfo);
+	
+	int modify(MemberInfo memberInfo);
 
 }
